@@ -1,0 +1,35 @@
+{
+    "app-id": "com.endlessm.BaseEknServicesMultiplexer",
+    "branch": "@BRANCH@",
+    "runtime": "com.endlessm.apps.Platform",
+    "runtime-version": "3",
+    "sdk": "com.endlessm.apps.Sdk",
+    "finish-args": [
+        "--filesystem=/var/lib/flatpak:ro",
+        "--filesystem=/var/endless-extra/flatpak:ro",
+        "--filesystem=~/.local/share/flatpak:ro",
+        "--share=network",
+        "--socket=session-bus"
+    ],
+    "add-extensions": {
+        "com.endlessm.EknServices.Extension": {
+            "directory": "build/eos-knowledge-services/1",
+            "no-autodownload": true,
+            "version": "eos3"
+        },
+        "com.endlessm.EknServices2.Extension": {
+            "directory": "build/eos-knowledge-services/2",
+            "no-autodownload": true
+        }
+    },
+    "modules": [
+        {
+            "name": "multi-eos-knowledge-services-directories",
+            "buildsystem": "simple",
+            "build-commands": [
+                "mkdir -p /app/build/eos-knowledge-services/1",
+                "mkdir -p /app/build/eos-knowledge-services/2"
+            ]
+        }
+    ]
+}
